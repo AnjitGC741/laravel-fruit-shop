@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\forAuthentication;
+use App\Http\Controllers\forDashboard;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('dashboard');
-// })->middleware(['auth']);
-Route::get('/',[forAuthentication::class,'dash'])->middleware(['auth']);
+Route::get('/', function () {
+    return view('home');
+});
+Route::get('delete/{id}',[forDashboard::class,'delete']);
+Route::get('/dashboard',[forDashboard::class,'dash'])->middleware(['auth']);
+Route::post('/dashboard',[forDashboard::class,'saveFruit'])->name('saveFruit');
 Route::get('/signup',[forAuthentication::class,'forSignup']);
 Route::get('/login',[forAuthentication::class,'forLogin']);
 Route::post('/login',[forAuthentication::class,'forLoginAuthentication'])->name('loginAdmin');

@@ -8,10 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class forAuthentication extends Controller
 {
-    public function dash()
-    {
-        return view('dashboard');
-    }
+  
     public function forSignup()
     {
         return view('signupPage');
@@ -40,7 +37,7 @@ class forAuthentication extends Controller
         ]);
         if(Auth::attempt($req->only('adminId','password'))){//form name
             // return redirect()->route('dashboard');
-            return redirect('/');
+            return redirect('/dashboard');
         }
         else{
             return back()->with('fail','user not found');
