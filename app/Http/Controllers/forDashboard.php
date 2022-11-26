@@ -11,9 +11,29 @@ class forDashboard extends Controller
 {
     public function dash()
     {
-        return view('dashboard',['list'=>fruit::all()]);
+        return view('dashboard',['list'=>fruit::all()],['SN'=>1]);
     }
-    public function saveFruit(Request $req)
+    
+    public function forEditFruit($id)
+    {
+        $data = fruit::find($id);
+        return view('editFruit',['value'=>$data]);
+    }
+    public function editFruit(Request $req)
+    {
+        $req->validate([
+            'fruitName' => 'required',
+            'price'=>'required',
+            'dateOfImport'=>'required',
+        ]);
+        $updateFruit = fruit::find($req->id);
+        $updateFruit->fruitName = $req->fruitName;
+        $updateFruit->price= $req->price;
+        $updateFruit->dateOfImport = $req->dateOfImport;
+        $updateFruit->save();
+        return redirect('/dashboard');
+    }
+    public function saveFruit1(Request $req)
     {
         $req->validate([
             'fruitName' => 'required',
