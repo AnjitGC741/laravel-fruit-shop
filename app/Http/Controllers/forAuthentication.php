@@ -43,4 +43,10 @@ class forAuthentication extends Controller
             return back()->with('fail','user not found');
         }
     }
+    public function logout()
+    {
+        auth()->logout();
+
+        return redirect('/login');
+    }
 }

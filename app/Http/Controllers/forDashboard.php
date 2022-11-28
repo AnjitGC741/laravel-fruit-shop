@@ -33,7 +33,7 @@ class forDashboard extends Controller
         $updateFruit->save();
         return redirect('/dashboard');
     }
-    public function saveFruit1(Request $req)
+    public function saveFruit(Request $req)
     {
         $req->validate([
             'fruitName' => 'required',
