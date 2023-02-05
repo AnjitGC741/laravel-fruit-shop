@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('fruits', function (Blueprint $table) {
-            $table->id();
-            $table->string('fruitName');
-            $table->integer('price');
-            $table->date('dateOfImport')->nullable();
-            $table->timestamps();
+        Schema::table('fruits', function (Blueprint $table) {
+            $table -> softDeletes();
         });
     }
 
@@ -29,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fruits');
+        Schema::table('fruits', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };
